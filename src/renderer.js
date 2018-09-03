@@ -33,17 +33,19 @@ async function renderPdf(req, res) {
     
     let pageContent = req.body;
     
-    winston.info('Render Prince PDF ..');
+    winston.info(`Render Prince PDF for HTML length ${pageContent.length}`);
 
     if(config.PRINCE_PDF_LICENSE_FILE)
         pdfOptions['license-file'] = config.PRINCE_PDF_LICENSE_FILE;
         
     const pdf = await prince(pageContent, pdfOptions);
 
+    winston.info('Prince PDF generated..');
+
     if ((req.query||{}).attachmentName) {
         res.attachment(opts.attachmentName);
     }
-    
+    res.set(200);
     res.set('content-type', 'application/pdf');
     res.send(pdf);
       
