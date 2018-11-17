@@ -55,8 +55,8 @@ async function renderPdf(req, res) {
         const pdf = await prince(pageContent, pdfOptions);
 
         winston.info('Prince PDF generated..');
-
-        if(!req.query.link){
+        
+        if(!req.query.link || req.query.link == 'false'){
             if ((req.query||{})["attachment-name"]) {
                 res.attachment(req.query["attachment-name"]);
             }
