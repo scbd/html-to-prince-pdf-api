@@ -3,10 +3,12 @@ const config = require('./config');
 const winston = require('./logger')(__filename);
 const prince    = require('prince-promise');
 const AWS = require('aws-sdk');
+const fs        = require('fs');
 
-let configFile = process.env.CONFIG_FILE;
+let configFile = process.env.CONFIG_FILE || '/run/secrets/config.json';
 let awsConfig = {};
-if(configFile){
+
+if(configFile && fs.existsSync(configFile)){
     awsConfig = require(configFile).awsAccessKeys.global;
 }
 let S3 = new AWS.S3({
