@@ -31,7 +31,14 @@ const Whitelist_PDFParams = [
 async function renderPdf(req, res) {
 
     try{
-        let pdfOptions = {};
+        let pdfOptions = {
+            "no-warn-css":true,
+        };
+        //custom style ,
+        pdfOptions.style = '/usr/src/app/src/character-entities.css';
+
+        if(pdfOptions.debug)
+            pdfOptions["no-warn-css"] = undefined
         
         let options = _.defaults({
             'media'         : 'screen',
@@ -44,7 +51,6 @@ async function renderPdf(req, res) {
                     pdfOptions[param] = options[param];
             });
         }
-        
         let pageContent = req.body;
         
         winston.info(`Render Prince PDF for HTML length ${pageContent.length}`);
