@@ -31,6 +31,9 @@ const Whitelist_PDFParams = [
 async function renderPdf(req, res) {
 
     try{
+
+        req.setTimeout(15*60*1000);
+        
         let pdfOptions = {
             "no-warn-css":true,
         };
@@ -92,7 +95,7 @@ async function renderPdf(req, res) {
         
     }
     catch(err){
-        winston.error(`Error rendering pdf: ${err}`);
+        winston.error(`Error rendering pdf:`, err);
         winston.error(err.stack);
         res.status(400).send('Error rendering pdf');
     }

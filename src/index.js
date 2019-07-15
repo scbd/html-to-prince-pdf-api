@@ -13,7 +13,7 @@ const server = app.listen(config.PORT, () => {
 });
 
 function closeServer(signal) {
-  winston.info(`${signal} received`);
+  winston.error(`${signal} received`);
 }
 
 process.on('SIGTERM', closeServer.bind(this, 'SIGTERM'));
