@@ -1,4 +1,4 @@
-﻿const _ = require('lodash');
+const _ = require('lodash');
 const config = require('./config');
 const winston = require('./logger')(__filename);
 const prince    = require('prince-promise');
@@ -76,7 +76,7 @@ async function renderPdf(req, res) {
         else{
             let bucket =  (req.query||{}).bucket|| 'pdf-cache-prod/drafts';
 
-            let key = `${((req.query||{})["attachment-name"]||'')}-${guid()}.pdf`
+            let key = ((req.query||{})["attachment-name"]||(guid()) + '.pdf')
             let s3Options =  {
                 Bucket      : bucket, 
                 Key         : key,
