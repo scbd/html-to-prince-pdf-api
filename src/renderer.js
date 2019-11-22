@@ -88,7 +88,7 @@ async function renderPdf(req, res) {
             let s3File = await S3.putObject(s3Options).promise();
             
             res.status(200);
-            res.send({url:`https://s3.amazonaws.com/pdf-cache-prod/drafts/${s3Options.Key}`});
+            res.send({url:`https://s3.amazonaws.com/${bucket}/${s3Options.Key}`});
 
         }
 
