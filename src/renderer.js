@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const config = require('./config');
 const winston = require('./logger')(__filename);
-const prince    = require('prince-promise');
+const prince    = require('./prince-promise');
 const AWS = require('aws-sdk');
 const fs        = require('fs');
 
@@ -40,7 +40,7 @@ async function renderPdf(req, res) {
         //custom style ,
         pdfOptions.style = '/usr/src/app/src/character-entities.css';
 
-        if(pdfOptions.debug)
+        if(config.DEBUG_MODE)
             pdfOptions["no-warn-css"] = undefined
         
         let options = _.defaults({
