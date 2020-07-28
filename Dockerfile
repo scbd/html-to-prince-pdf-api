@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install --assume-yes \
 
 # Install PrinceXML
 #https://www.princexml.com/download/prince-12.5-linux-generic-x86_64.tar.gz
-ENV PRINCE=prince-13.5-linux-generic-x86_64
+ENV PRINCE=prince-12.5-linux-generic-x86_64
 ENV PRINCE_TAR=$PRINCE.tar.gz
 RUN wget http://www.princexml.com/download/$PRINCE_TAR \
   && tar -xzf $PRINCE_TAR \
