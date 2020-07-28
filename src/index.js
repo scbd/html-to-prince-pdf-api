@@ -14,8 +14,9 @@ const server = app.listen(config.PORT, () => {
 
 function closeServer(signal) {
   winston.error(`${signal} received`);
+  process.exit(0);
 }
 
 process.on('SIGTERM', closeServer.bind(this, 'SIGTERM'));
-process.on('SIGINT', closeServer.bind(this, 'SIGINT(Ctrl-C)'));
+process.on('SIGINT',  closeServer.bind(this, 'SIGINT(Ctrl-C)'));
 

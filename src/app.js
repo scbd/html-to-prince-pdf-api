@@ -14,12 +14,14 @@ function createApp() {
     app.use(morgan('dev'));
   }
 
-  const corsOpts = {
-    origin: config.CORS_ORIGIN,
-    methods: ['POST', 'OPTIONS', 'HEAD'],
-  };
-  winston.info('Using CORS options:', corsOpts);
-  app.use(cors(corsOpts));
+  if(config.CORS_ORIGIN) {
+    const corsOpts = {
+      origin: config.CORS_ORIGIN,
+      methods: ['POST', 'OPTIONS', 'HEAD'],
+    };
+    winston.info('Using CORS options:', corsOpts);
+    app.use(cors(corsOpts));
+  }
 
   app.use(bodyParser.text({ limit: '20mb', type: 'text/html' }));
   app.use(bodyParser.json({ limit: '20mb' }));
