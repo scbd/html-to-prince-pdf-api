@@ -4,8 +4,9 @@ var dargs = require('dargs');
 var Prince = require('prince')();
 var _ = require('lodash');
 var spawn = require('spawn-promise');
+var config = require('./config');
 
-var prince = Prince.config.binary;
+var prince = config.PRINCE_BINARY || Prince.config.binary;
 // Mandatory args, never want these overridden
 var args = [
 	'-' // read from stdin

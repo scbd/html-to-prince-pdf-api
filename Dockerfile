@@ -32,6 +32,8 @@ RUN npm install -q
 
 COPY . ./
 
+ENV PRINCE_BINARY "prince"
+
 EXPOSE 7070
 
 CMD ["node", "src/index.js" ]
