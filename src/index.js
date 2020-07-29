@@ -2,6 +2,7 @@ const createApp = require('./app');
 const winston = require('./logger')(__filename);
 const config = require('./config');
 
+winston.debug('Log level is debug');
 
 const app = createApp();
 const server = app.listen(config.PORT, () => {
