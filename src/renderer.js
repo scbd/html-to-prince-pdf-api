@@ -20,6 +20,7 @@ let S3 = new AWS.S3({
 
 const Whitelist_PDFParams = [
     'baseurl'     ,
+    'media'       ,
     'page-margin' ,
     'pdf-title'   ,
     'pdf-subject' ,
@@ -43,17 +44,14 @@ async function renderPdf(req, res) {
         if(config.DEBUG_MODE)
             pdfOptions["no-warn-css"] = undefined
         
-        let options = _.defaults({
-            'media'         : 'screen',
-            'page-margin'   : '0.5cm',
-        }, req.query);
-        
-        if(options){
-            _.each(Whitelist_PDFParams, function(param){
-                if(options[param])
-                    pdfOptions[param] = options[param];
-            });
-        }
+        const userOptions = {
+            'media'       : 'screen',
+            'page-margin' : '0.5cm',
+             ...req.query
+        };
+
+        pdfOptions = { ...pdfOptions, ..._.pick(userOptions, Whitelist_PDFParams)}
+
         let pageContent = req.body;
         
         winston.info(`Render Prince PDF for HTML length ${pageContent.length}`);
