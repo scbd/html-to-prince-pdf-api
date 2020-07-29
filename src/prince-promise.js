@@ -19,6 +19,10 @@ var render = async function (input, options) {
 	
 	// Convert {optionName: value} -> ['--option-name=value']
 	options = dargs(options);
+
+	winston.debug(`Binary: ${prince}`);
+	winston.debug(`Options: ${JSON.stringify(options, null, '  ')}`);
+
 	return await spawn(prince, args.concat(options), input);
 };
 
