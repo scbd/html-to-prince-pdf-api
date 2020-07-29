@@ -1,9 +1,4 @@
-﻿FROM node:10.8.0
-
-# https://stackoverflow.com/questions/55386246/w-failed-to-fetch-http-deb-debian-org-debian-dists-jessie-updates-main-binary
-RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie.list
-
-RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
+﻿FROM node:14.6.0
 
 # Install utilities
 RUN apt-get update && apt-get install --assume-yes \
