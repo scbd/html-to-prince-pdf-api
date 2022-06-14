@@ -1,4 +1,4 @@
-﻿FROM node:14.6.0
+﻿FROM node:18
 
 # Install utilities
 RUN apt-get update && apt-get install --assume-yes \
