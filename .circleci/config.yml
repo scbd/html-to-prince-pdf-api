@@ -2,7 +2,10 @@
 
 _defaults: &defaults
   docker:
-    - image: docker:17.05.0-ce
+    - image: docker:19.03.13-git
+      auth:
+        username: $DOCKER_USER
+        password: $DOCKER_PASS 
   working_directory: ~/scbd/html-to-prince-pdf-api
   parallelism: 1
 
