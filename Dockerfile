@@ -1,11 +1,12 @@
-﻿FROM node:18
+FROM node:26-bookworm-slim
 
 # Install utilities
 RUN apt-get update && apt-get install --assume-yes \
     wget \
     curl \
+    ca-certificates \
   && apt-get clean \
-  && apt-get install -y fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 fonts-wqy-zenhei \
+  && apt-get install -y fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf fonts-dejavu-core libxss1 fonts-wqy-zenhei \
       --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
@@ -13,7 +14,7 @@ RUN apt-get update && apt-get install --assume-yes \
 #Prince 14.* using latest(nightly) build as suggested by Prince support
 ENV PRINCE=prince-20220808-linux-generic-x86_64
 ENV PRINCE_TAR=$PRINCE.tar.gz
-RUN wget http://www.princexml.com/download/$PRINCE_TAR \
+RUN wget https://www.princexml.com/download/$PRINCE_TAR \
   && tar -xzf $PRINCE_TAR \
   && rm $PRINCE_TAR \
   && cd $PRINCE \
@@ -30,7 +31,7 @@ RUN npm install -q
 
 COPY . ./
 
-ENV PRINCE_BINARY "prince"
+ENV PRINCE_BINARY=prince
 
 EXPOSE 7070
 
